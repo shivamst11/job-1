@@ -1,11 +1,11 @@
-export const BASE_URL = 'https://rc.scout.co.kr';
+export const BASE_URL = 'https://scout.co.kr';
 
 const urls = {
-  HOME: BASE_URL,
   EMPLOYMENT: `${BASE_URL}/employment?keyword=all`,
-  ENTERPRISE: `${BASE_URL}/company?keyword=all`,
-  PROFILE: `${BASE_URL}/company?keyword=all`,
-  USER: `${BASE_URL}/login/user`,
+  ENTERPRISE: `https://scout.co.kr/company?keyword=all`, //Todo : url not working in mobile web
+  HOME: BASE_URL,
+  PROFILE: `${BASE_URL}/my/job_seeker`, //Todo: change the url
+  USER: `${BASE_URL}/my/job_seeker`,
 };
 
 export default urls;
