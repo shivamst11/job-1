@@ -24,3 +24,20 @@ things to learn
 expo push notificatoin
 i18n
 redux tool kit
+
+list of api's
+
+company Login: https://localhost/auth/company/login payload {"id":"swapnil@gmail.com","password":"Gupta@gmail123"}
+
+user login: https://localhost/auth/user/login payload {id: "SwapnilGupta.xi@gmail.com", password: "Guptaswap@12"}
+
+web login - > have to call a function in react native with login api response ->
+
+react native what we have now : -> notification token, userId , pushnofication
+
+push notification api post :-> payload
+{
+userId: 1234567890,
+pushToken: 12dfghj45678,
+platform: andriod | ios
+}

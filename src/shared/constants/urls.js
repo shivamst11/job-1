@@ -1,4 +1,4 @@
-export const BASE_URL = 'https://scout.co.kr';
+export const BASE_URL = 'http://localhost:3000';
 
 const urls = {
   EMPLOYMENT: `${BASE_URL}/employment?keyword=all`,

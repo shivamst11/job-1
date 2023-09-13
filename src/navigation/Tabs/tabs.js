@@ -4,10 +4,12 @@ import WebScreen from '../../shared/WebView/WebView';
 import { Image, StyleSheet, Text } from 'react-native';
 import { IMAGE_PATH } from '../../shared/constants/imagePath';
 import urls from '../../shared/constants/urls';
+import { useGlobal } from '../../shared/hooks/useGlobal';
 
 const Tab = createBottomTabNavigator();
 
 function BottomTabNavigation() {
+  const { isCorporateView } = useGlobal();
   const tabs = useMemo(
     () => [
       {
@@ -49,6 +51,35 @@ function BottomTabNavigation() {
     []
   );
 
+  const corporateTabs = useMemo(
+    () => [
+      {
+        name: 'company',
+        component: WebScreen,
+        imagePath: IMAGE_PATH.EMPLOYMENT,
+        label: 'Company',
+        params: { url: urls.EMPLOYMENT },
+      },
+      {
+        name: 'home',
+        component: WebScreen,
+        imagePath: IMAGE_PATH.ENTERPRISE,
+        label: 'Home',
+        params: { url: urls.ENTERPRISE },
+      },
+      {
+        name: 'profile',
+        component: WebScreen,
+        imagePath: IMAGE_PATH.HOME,
+        label: 'Profile',
+        params: { url: urls.HOME },
+      },
+    ],
+    []
+  );
+
+  const bottomTabs = isCorporateView ? corporateTabs : tabs;
+
   return (
     <Tab.Navigator
       screenOptions={{
@@ -57,7 +88,7 @@ function BottomTabNavigation() {
         headerShown: false,
       }}
     >
-      {tabs.map((item) => {
+      {bottomTabs.map((item) => {
         return (
           <Tab.Screen
             key={item.name}

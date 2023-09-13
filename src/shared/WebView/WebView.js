@@ -2,9 +2,12 @@ import React, { useRef, useState, useEffect } from 'react';
 import { StyleSheet, View, BackHandler, Platform } from 'react-native';
 import { WebView } from 'react-native-webview';
 import Loader from '../components/Loader/Loader';
+import { useGlobal } from '../hooks/useGlobal';
+import { Platform } from 'react-native';
 
 const WebScreen = (props) => {
   const [loading, setLoading] = useState(false);
+  const { setIsCorporateView } = useGlobal();
   const webViewRef = useRef(null);
   const onAndroidBackPress = () => {
     if (webViewRef.current) {
@@ -27,15 +30,33 @@ const WebScreen = (props) => {
   }, []);
   const url = props.route.params.url;
 
+  useEffect(() => {
+    const tabName = props.route.name;
+    if (tabName === 'fifth') {
+      setIsCorporateView(true);
+    } else if (tabName === 'home') {
+      setIsCorporateView(false);
+    }
+  }, [props]);
+
+  const { pushToken } = useNotification();
+
   return (
     <View style={styles.container}>
       <WebView
         ref={webViewRef}
         originWhitelist={['*']}
-        source={{ uri: url }}
+        source={{ uri: '' }}
         cacheEnabled
         onLoadStart={() => setLoading(true)}
         scrollEnabled={true}
+        onMessage={(event) => {
+          const loginResponse = JSON.parse(event.data);
+
+          //push token
+          //userid from loginResponse
+          //platform type Platform.OS
+        }}
         pagingEnabled={true}
         javaScriptEnabled={true}
         pullToRefreshEnabled={true}
