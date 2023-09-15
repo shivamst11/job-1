@@ -1,9 +1,10 @@
-import React, { useRef, useState, useEffect } from 'react';
 import { StyleSheet, View, BackHandler, Platform } from 'react-native';
 import { WebView } from 'react-native-webview';
+import React,{useState,useRef, useEffect} from 'react';
 import Loader from '../components/Loader/Loader';
 import { useGlobal } from '../hooks/useGlobal';
-import { Platform } from 'react-native';
+
+
 
 const WebScreen = (props) => {
   const [loading, setLoading] = useState(false);
@@ -32,21 +33,20 @@ const WebScreen = (props) => {
 
   useEffect(() => {
     const tabName = props.route.name;
-    if (tabName === 'fifth') {
+    if (tabName === 'enterprise') {
       setIsCorporateView(true);
     } else if (tabName === 'home') {
       setIsCorporateView(false);
     }
   }, [props]);
 
-  const { pushToken } = useNotification();
 
   return (
     <View style={styles.container}>
       <WebView
         ref={webViewRef}
         originWhitelist={['*']}
-        source={{ uri: '' }}
+        source={{ uri: url }}
         cacheEnabled
         onLoadStart={() => setLoading(true)}
         scrollEnabled={true}
