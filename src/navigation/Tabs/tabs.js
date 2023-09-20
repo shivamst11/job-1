@@ -16,7 +16,7 @@ function BottomTabNavigation() {
         name: 'recruitment',
         component: WebScreen,
         imagePath: IMAGE_PATH.EMPLOYMENT,
-        label: '기업',
+        label: '채용',
         params: { url: urls.EMPLOYMENT },
       },
       {

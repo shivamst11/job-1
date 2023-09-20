@@ -1,4 +1,8 @@
+<<<<<<< Updated upstream
 export const BASE_URL = 'https://scout.co.kr';
+=======
+export const BASE_URL = 'https://rc.scout.co.kr';
+>>>>>>> Stashed changes
 
 const urls = {
   EMPLOYMENT: `${BASE_URL}/employment?keyword=all`,

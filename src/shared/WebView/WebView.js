@@ -51,8 +51,9 @@ const WebScreen = (props) => {
         onLoadStart={() => setLoading(true)}
         scrollEnabled={true}
         onMessage={(event) => {
+          console.log("swapnil");
           const loginResponse = JSON.parse(event.data);
-
+          console.log(loginResponse);
           //push token
           //userid from loginResponse
           //platform type Platform.OS
