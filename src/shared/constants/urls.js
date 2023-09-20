@@ -1,9 +1,4 @@
-<<<<<<< Updated upstream
-export const BASE_URL = 'https://scout.co.kr';
-=======
 export const BASE_URL = 'https://rc.scout.co.kr';
->>>>>>> Stashed changes
-
 const urls = {
   EMPLOYMENT: `${BASE_URL}/employment?keyword=all`,
   ENTERPRISE: `https://scout.co.kr/company?keyword=all`, //Todo : url not working in mobile web
