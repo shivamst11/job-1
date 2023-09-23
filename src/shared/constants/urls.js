@@ -9,5 +9,4 @@ const urls = {
   SCOUT: `${BASE_URL}/my/job_seeker`,
   
 };
-
 export default urls;
