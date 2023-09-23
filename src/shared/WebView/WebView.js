@@ -1,15 +1,18 @@
 import { StyleSheet, View, BackHandler, Platform } from 'react-native';
 import { WebView } from 'react-native-webview';
-import React,{useState,useRef, useEffect} from 'react';
-import Loader from '../components/Loader/Loader';
+import React, { useState, useRef, useEffect } from 'react';
 import { useGlobal } from '../hooks/useGlobal';
-
-
+import { saveNotification } from '../api/saveNotification';
+import { useNotification } from '../hooks/useNotification';
+import { getData, storeData } from '../utils/localStorage';
 
 const WebScreen = (props) => {
   const [loading, setLoading] = useState(false);
   const { setIsCorporateView } = useGlobal();
   const webViewRef = useRef(null);
+  const url = props.route.params.url;
+  const { registerForPushNotification } = useNotification();
+
   const onAndroidBackPress = () => {
     if (webViewRef.current) {
       webViewRef.current.goBack();
@@ -29,7 +32,18 @@ const WebScreen = (props) => {
       };
     }
   }, []);
-  const url = props.route.params.url;
+
+  const onMessageEvent = async (event) => {
+    const eventData = JSON.parse(event.nativeEvent.data);
+    const userId = eventData?.userId;
+    await storeData('user-id', userId);
+    const token = await registerForPushNotification();
+    saveNotification({
+      notificationToken: token.data,
+      platform: Platform.OS,
+      userId: userId,
+    });
+  };
 
   useEffect(() => {
     const tabName = props.route.name;
@@ -40,6 +54,24 @@ const WebScreen = (props) => {
     }
   }, [props]);
 
+  useEffect(() => {
+    (async () => {
+      let userId;
+      try {
+        userId = await getData('user-id');
+      } catch (error) {
+        console.warn(error);
+      }
+      const token = await registerForPushNotification();
+      if (userId && token) {
+        saveNotification({
+          notificationToken: token,
+          platform: Platform.OS,
+          userId: userId,
+        });
+      }
+    })();
+  }, []);
 
   return (
     <View style={styles.container}>
@@ -50,14 +82,7 @@ const WebScreen = (props) => {
         cacheEnabled
         onLoadStart={() => setLoading(true)}
         scrollEnabled={true}
-        onMessage={(event) => {
-          console.log("swapnil");
-          const loginResponse = JSON.parse(event.data);
-          console.log(loginResponse);
-          //push token
-          //userid from loginResponse
-          //platform type Platform.OS
-        }}
+        onMessage={onMessageEvent}
         pagingEnabled={true}
         javaScriptEnabled={true}
         pullToRefreshEnabled={true}

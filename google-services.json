@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "69358454652",
+    "project_id": "scout-job-app-1",
+    "storage_bucket": "scout-job-app-1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:69358454652:android:839e48be72f2a3806806f9",
+        "android_client_info": {
+          "package_name": "com.scout.job1"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBMo6VZBPEhaP6MeDFKIFPSElrO7ZFtops"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
