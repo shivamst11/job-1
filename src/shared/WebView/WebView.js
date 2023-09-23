@@ -65,7 +65,7 @@ const WebScreen = (props) => {
       const token = await registerForPushNotification();
       if (userId && token) {
         saveNotification({
-          notificationToken: token,
+          notificationToken: token.data,
           platform: Platform.OS,
           userId: userId,
         });
