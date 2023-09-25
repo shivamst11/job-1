@@ -13,7 +13,7 @@ function BottomTabNavigation() {
   const tabs = useMemo(
     () => [
       {
-        name: 'recruitment',
+        name: 'recruitments',
         component: WebScreen,
         imagePath: IMAGE_PATH.EMPLOYMENT,
         label: '채용',
